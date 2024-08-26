@@ -54,7 +54,7 @@ section {
 }
 
 .about, .projects, .skills, .contact {
-    max-width: 1000px;
+    max-width: 1500px;
     margin: 0 auto;
     background-color: #FFFFFF; /* White */
     border-radius: 8px;
