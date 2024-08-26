@@ -65,11 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 count += increment;
                 counter.innerText = Math.ceil(count);
                 requestAnimationFrame(updateCount);
-            } else {
+            } 
+            else {
                 counter.innerText = target;
             }
         };
-
+ 
         updateCount();
     });
 });
