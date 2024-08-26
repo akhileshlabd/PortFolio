@@ -14,7 +14,7 @@
 //     yoyo: true 
 // });
 
-// Parallax Effect
+// Parallax Effect hide
 // document.addEventListener('mousemove', (e) => {
 //     const layers = document.querySelectorAll('.hero-title, .hero-subtitle');
 //     layers.forEach(layer => {
