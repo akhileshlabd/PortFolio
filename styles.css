@@ -2,9 +2,9 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #0d0d0d;
-    color: #f0f0f0;
+    font-family: 'Lato', sans-serif;
+    background-color: #F0F0F0; /* Soft Gray */
+    color: #1D3557; /* Navy Blue */
     overflow-x: hidden;
 }
 
@@ -16,18 +16,19 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(135deg, #0d0d0d 40%, #1a1a1a 100%);
+    background: #1D3557; /* Navy Blue */
+    color: #FFFFFF; /* White */
 }
 
 .hero-title {
     font-size: 4rem;
-    color: #39ff14;
+    color: #FFB703; /* Gold */
     animation: fadeIn 2s ease-in-out;
 }
 
 .hero-subtitle {
     font-size: 1.5rem;
-    color: #39ff14;
+    color: #FFFFFF; /* White */
     animation: slideInFromLeft 1.5s ease-in-out;
 }
 
@@ -40,19 +41,24 @@ section {
 .about, .projects, .skills, .contact {
     max-width: 1000px;
     margin: 0 auto;
+    background-color: #FFFFFF; /* White */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
 }
 
 .project-card {
-    background: #1a1a1a;
+    background: #457B9D; /* Sky Blue */
     padding: 20px;
     margin: 20px 0;
     border-radius: 8px;
     transition: transform 0.3s ease;
+    color: #FFFFFF; /* White */
 }
 
 .project-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(57, 255, 20, 0.8);
+    box-shadow: 0 0 20px rgba(255, 183, 3, 0.8); /* Gold */
 }
 
 .skill-bar {
@@ -60,7 +66,7 @@ section {
 }
 
 .bar {
-    background: #333;
+    background: #A8DADC; /* Soft Gray */
     height: 10px;
     border-radius: 5px;
     overflow: hidden;
@@ -69,7 +75,7 @@ section {
 .js-skill, .sf-skill {
     display: block;
     height: 100%;
-    background: #39ff14;
+    background: #FFB703; /* Gold */
     width: 80%; /* Adjust based on skill level */
     animation: growBar 2s ease-in-out;
 }
@@ -84,28 +90,31 @@ form {
 input, textarea {
     padding: 10px;
     border-radius: 5px;
-    border: none;
+    border: 1px solid #1D3557; /* Navy Blue */
     font-size: 1rem;
+    background-color: #F0F0F0; /* Soft Gray */
 }
 
 button {
     padding: 10px;
-    background: #39ff14;
+    background: #FFB703; /* Gold */
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    color: #1D3557; /* Navy Blue */
 }
 
 button:hover {
-    background-color: #28cc0f;
+    background-color: #E09B00; /* Darker Gold */
 }
 
 /* Footer */
 footer {
     padding: 20px;
     text-align: center;
-    background: #0d0d0d;
+    background: #1D3557; /* Navy Blue */
+    color: #FFFFFF; /* White */
 }
 
 /* Keyframes */
