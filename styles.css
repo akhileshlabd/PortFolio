@@ -24,8 +24,8 @@ body {
 }
 
 .hero-image img {
-    width: 70px; /* Adjust size as needed */
-    height: 70px; /* Adjust size as needed */
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Adjust size as needed */
     border-radius: 50%;
     border: 5px solid #00ff00; /* Neon green border color */
     box-shadow: 0 0 15px rgba(0, 255, 0, 0.75); /* Futuristic glowing effect */
