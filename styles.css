@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: #1D3557; /* Navy Blue */
+    background: #525f70; /* Navy Blue */
     color: #FFFFFF; /* White */
 }
 .hero-image {
@@ -37,7 +37,7 @@ body {
 }
 .hero-title {
     font-size: 4rem;
-    color: #FFB703; /* Gold */
+    color: #ffffff; /* Gold */
     animation: fadeIn 2s ease-in-out;
 }
 
