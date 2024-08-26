@@ -33,7 +33,7 @@ body {
 }
 
 .hero-image img:hover {
-    box-shadow: 0 0 25px rgba(255, 255, 204, 1); /* Intense glowing effect on hover */
+    box-shadow: 0 0 25px #f4eded; /* Intense glowing effect on hover */
 }
 .hero-title {
     font-size: 4rem;
