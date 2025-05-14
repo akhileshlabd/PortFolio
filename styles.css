@@ -8,6 +8,41 @@ body {
     overflow-x: hidden;
 }
 
+/* Tab Styles */
+.tab-container {
+    background-color: #1D3557; /* Navy Blue */
+    color: #FFFFFF; /* White */
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.tab.active {
+    background-color: #FFB703; /* Gold */
+}
+
+.tab:hover {
+    background-color: #E09B00; /* Darker Gold */
+}
+
 /* Hero Section */
 .hero {
     height: 100vh;
@@ -18,7 +53,9 @@ body {
     text-align: center;
     background: #525f70; /* Navy Blue */
     color: #FFFFFF; /* White */
+    padding-top: 50px; /* To ensure space for the fixed tab bar */
 }
+
 .hero-image {
     margin-bottom: 20px;
 }
@@ -62,66 +99,18 @@ section {
     padding: 40px;
 }
 
-.project-card {
-    background: #457B9D; /* Sky Blue */
+/* Tab Content */
+.tab-content {
+    padding-top: 80px; /* To ensure content is not hidden behind the fixed tabs */
+}
+
+.tab-pane {
+    display: none;
     padding: 20px;
-    margin: 20px 0;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-    color: #FFFFFF; /* White */
 }
 
-.project-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 183, 3, 0.8); /* Gold */
-}
-
-.skill-bar {
-    margin: 20px 0;
-}
-
-.bar {
-    background: #A8DADC; /* Soft Gray */
-    height: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.js-skill, .sf-skill {
+.tab-pane.active {
     display: block;
-    height: 100%;
-    background: #FFB703; /* Gold */
-    width: 80%; /* Adjust based on skill level */
-    animation: growBar 2s ease-in-out;
-}
-
-/* Contact Form */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-input, textarea {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #1D3557; /* Navy Blue */
-    font-size: 1rem;
-    background-color: #F0F0F0; /* Soft Gray */
-}
-
-button {
-    padding: 10px;
-    background: #FFB703; /* Gold */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    color: #1D3557; /* Navy Blue */
-}
-
-button:hover {
-    background-color: #E09B00; /* Darker Gold */
 }
 
 /* Footer */
@@ -141,51 +130,4 @@ footer {
 @keyframes slideInFromLeft {
     from { transform: translateX(-100%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes growBar {
-    from { width: 0; }
-    to { width: 80%; }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 3rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-}
-/* Header Counters */
-.counters {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 70px;
-}
-
-.counter {
-    text-align: center;
-    color: #FFFFFF; /* White */
-}
-
-.counter-number {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #FFFFFF; /* White */
-    display: inline-block;
-    margin-bottom: 10px;
-}
-
-.plus-sign {
-    font-size: 2.5rem;
-    color: #FFFFFF; /* White */
-    margin-left: 5px; /* Space between number and plus sign */
-}
-
-.counter p {
-    font-size: 1rem;
-    color: #FFFFFF; /* White */
 }
