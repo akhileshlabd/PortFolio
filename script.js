@@ -1,23 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Tab switching functionality
-  const tabs = document.querySelectorAll('.tab');
-  const tabContent = document.querySelectorAll('.tab-pane');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetTab = tab.getAttribute('data-tab');
-      
-      // Deactivate all tabs and hide content
-      tabs.forEach(t => t.classList.remove('active'));
-      tabContent.forEach(content => content.classList.remove('active'));
-
-      // Activate clicked tab and show content
-      tab.classList.add('active');
-      document.getElementById(targetTab).classList.add('active');
-    });
-  });
-
-  // Counter functionality
   const counters = document.querySelectorAll('.counter-number');
 
   counters.forEach(counter => {
