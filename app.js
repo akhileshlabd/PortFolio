@@ -1,4 +1,4 @@
-// Portfolio Website JavaScript
+// Portfolio Website JavaScript - ENHANCED VERSION
 
 document.addEventListener('DOMContentLoaded', function() {
     // Navigation elements
@@ -6,13 +6,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav__link');
-    
+
+    // Hero section elements to hide/show
+    const heroContent = document.querySelector('.hero__content');
+    const heroTitle = document.querySelector('.hero__title');
+    const heroSubtitle = document.querySelector('.hero__subtitle');
+    const heroTagline = document.querySelector('.hero__tagline');
+    const heroActions = document.querySelector('.hero__actions');
+
     // Skill cards
     const skillCards = document.querySelectorAll('.skill-card');
-    
+
     // Contact form
     const contactForm = document.getElementById('contact-form');
-    
+
     // Mobile navigation toggle
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', function() {
@@ -45,14 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
-            
+
             if (targetId && targetId !== '#') {
                 const targetSection = document.querySelector(targetId);
-                
+
                 if (targetSection) {
                     const headerHeight = header ? header.offsetHeight : 80;
                     const targetPosition = targetSection.offsetTop - headerHeight - 20;
-                    
+
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
@@ -62,7 +69,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Active navigation link highlighting
+    // ENHANCED: Hide hero content when About Me section is visible
+    function handleHeroVisibility() {
+        const aboutSection = document.getElementById('about');
+        const heroSection = document.querySelector('.hero');
+
+        if (aboutSection && heroSection) {
+            const aboutRect = aboutSection.getBoundingClientRect();
+            const heroRect = heroSection.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+
+            // Check if About section is entering the viewport
+            const aboutIsVisible = aboutRect.top < viewportHeight * 0.8;
+
+            // Hide hero content when about section becomes visible
+            if (aboutIsVisible && heroContent) {
+                heroContent.style.opacity = '0';
+                heroContent.style.transform = 'translateY(-30px)';
+                heroContent.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            } else if (heroContent) {
+                heroContent.style.opacity = '1';
+                heroContent.style.transform = 'translateY(0)';
+                heroContent.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            }
+        }
+    }
+
+    // Active navigation link highlighting with hero content management
     function updateActiveNavLink() {
         const sections = document.querySelectorAll('section');
         const scrollPos = window.scrollY + (header ? header.offsetHeight : 80) + 100;
@@ -80,6 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+
+        // Also handle hero visibility
+        handleHeroVisibility();
     }
 
     window.addEventListener('scroll', updateActiveNavLink);
@@ -98,15 +134,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const skillCard = entry.target;
                 const progressBar = skillCard.querySelector('.skill-card__progress');
                 const level = skillCard.getAttribute('data-level');
-                
+
                 skillCard.classList.add('animate');
-                
+
                 // Animate progress bar
                 if (progressBar && level) {
                     progressBar.style.setProperty('--progress-width', level + '%');
                     progressBar.style.width = level + '%';
                 }
-                
+
                 skillObserver.unobserve(skillCard);
             }
         });
@@ -140,35 +176,35 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const formData = new FormData(contactForm);
             const name = formData.get('name').trim();
             const email = formData.get('email').trim();
             const message = formData.get('message').trim();
-            
+
             // Basic validation
             if (!name || !email || !message) {
                 showNotification('Please fill in all fields.', 'error');
                 return;
             }
-            
+
             if (!isValidEmail(email)) {
                 showNotification('Please enter a valid email address.', 'error');
                 return;
             }
-            
+
             // Simulate form submission
             const submitButton = contactForm.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
-            
+
             submitButton.textContent = 'Sending...';
             submitButton.disabled = true;
-            
+
             // Simulate API call delay
             setTimeout(() => {
                 showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
                 contactForm.reset();
-                
+
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
             }, 1500);
@@ -186,19 +222,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // Remove existing notifications
         const existingNotifications = document.querySelectorAll('.notification');
         existingNotifications.forEach(notification => notification.remove());
-        
+
         const notification = document.createElement('div');
         notification.className = `notification notification--${type}`;
-        
+
         const colors = {
             success: { bg: '#10b981', text: '#ffffff' },
             error: { bg: '#ef4444', text: '#ffffff' },
             info: { bg: '#3b82f6', text: '#ffffff' },
             warning: { bg: '#f59e0b', text: '#ffffff' }
         };
-        
+
         const color = colors[type] || colors.info;
-        
+
         notification.innerHTML = `
             <div style="
                 display: flex;
@@ -223,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ">×</button>
             </div>
         `;
-        
+
         // Apply comprehensive styles
         Object.assign(notification.style, {
             position: 'fixed',
@@ -242,14 +278,14 @@ document.addEventListener('DOMContentLoaded', function() {
             maxWidth: '400px',
             minWidth: '300px'
         });
-        
+
         document.body.appendChild(notification);
-        
+
         // Animate in
         setTimeout(() => {
             notification.style.transform = 'translateX(0)';
         }, 100);
-        
+
         // Auto remove after 5 seconds
         setTimeout(() => {
             if (notification.parentElement) {
@@ -262,85 +298,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 5000);
     }
-
-    // Parallax effect for hero section
-    function handleParallax() {
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            const scrolled = window.pageYOffset;
-            const parallaxSpeed = 0.5;
-            hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-        }
-    }
-
-    // Add parallax on scroll (optional - can be removed if performance is an issue)
-    let ticking = false;
-    function requestParallax() {
-        if (!ticking) {
-            requestAnimationFrame(handleParallax);
-            ticking = true;
-        }
-    }
-
-    window.addEventListener('scroll', () => {
-        requestParallax();
-        ticking = false;
-    });
-
-    // Smooth reveal animations for sections
-    const revealElements = document.querySelectorAll('.section__header, .hero__content > *');
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 100);
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    revealElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        revealObserver.observe(element);
-    });
-
-    // Add loading states and smooth transitions
-    window.addEventListener('load', function() {
-        document.body.classList.add('loaded');
-        
-        // Initialize all animations after page load
-        setTimeout(() => {
-            updateActiveNavLink();
-        }, 100);
-    });
-
-    // Handle window resize
-    window.addEventListener('resize', function() {
-        // Close mobile menu on resize
-        if (window.innerWidth > 768) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-        }
-        
-        // Update active nav link
-        updateActiveNavLink();
-    });
-
-    // Add keyboard navigation support
-    document.addEventListener('keydown', function(e) {
-        // Close mobile menu with Escape key
-        if (e.key === 'Escape') {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-        }
-    });
 
     // Performance optimization: debounce scroll events
     function debounce(func, wait) {
@@ -363,5 +320,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', debouncedScroll);
 
-    console.log('Akhilesh Lalkumar Portfolio - Loaded successfully! 🚀');
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        // Close mobile menu on resize
+        if (window.innerWidth > 768) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        }
+
+        // Update active nav link and hero visibility
+        updateActiveNavLink();
+    });
+
+    // Add keyboard navigation support
+    document.addEventListener('keydown', function(e) {
+        // Close mobile menu with Escape key
+        if (e.key === 'Escape') {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        }
+    });
+
+    console.log('Akhilesh Lalkumar Portfolio - Enhanced with Hero Content Management! 🚀');
 });
