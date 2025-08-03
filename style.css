@@ -156,6 +156,7 @@ a:hover {
 
 .btn--primary:hover {
   background: var(--color-primary-hover);
+  color:black;
 }
 
 .btn--secondary {
