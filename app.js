@@ -54,6 +54,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetId = this.getAttribute('href');
 
             if (targetId && targetId !== '#') {
+                if (targetId === '#home') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+
                 const targetSection = document.querySelector(targetId);
 
                 if (targetSection) {
@@ -163,8 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Apply fade-in animation to project cards and other elements
-    const animatedElements = document.querySelectorAll('.project-card, .about__detail, .contact__item');
+    // Apply fade-in animation to project cards, experience cards, cert cards and other elements
+    const animatedElements = document.querySelectorAll('.project-card, .about__detail, .contact__item, .experience-card, .cert-card');
     animatedElements.forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(20px)';
@@ -172,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fadeObserver.observe(element);
     });
 
-    // Contact form handling - FIXED
+    // Contact form handling - sends message directly to Akhilesh's email via mailto
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -193,21 +201,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Simulate form submission
             const submitButton = contactForm.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
 
-            submitButton.textContent = 'Sending...';
+            submitButton.textContent = 'Opening Email...';
             submitButton.disabled = true;
 
-            // Simulate API call delay
+            const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            const mailtoUrl = `mailto:akhileshlabd@gmail.com?subject=${subject}&body=${body}`;
+
             setTimeout(() => {
-                showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+                window.location.href = mailtoUrl;
+                showNotification('Thank you! Opening your email client to send your message to Akhilesh.', 'success');
                 contactForm.reset();
 
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
-            }, 1500);
+            }, 500);
         });
     }
 
