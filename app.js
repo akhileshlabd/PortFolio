@@ -180,9 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
         fadeObserver.observe(element);
     });
 
-    // Contact form handling - sends message directly to Akhilesh's email via mailto
+    // Contact form handling - sends message directly to Akhilesh's inbox via Formspree
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const formData = new FormData(contactForm);
@@ -204,21 +204,36 @@ document.addEventListener('DOMContentLoaded', function() {
             const submitButton = contactForm.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
 
-            submitButton.textContent = 'Opening Email...';
+            submitButton.textContent = 'Sending...';
             submitButton.disabled = true;
 
-            const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-            const mailtoUrl = `mailto:akhileshlabd@gmail.com?subject=${subject}&body=${body}`;
+            try {
+                const response = await fetch(contactForm.action || 'https://formspree.io/f/meaobvwb', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
 
-            setTimeout(() => {
-                window.location.href = mailtoUrl;
-                showNotification('Thank you! Opening your email client to send your message to Akhilesh.', 'success');
-                contactForm.reset();
-
+                if (response.ok) {
+                    showNotification('Thank you, ' + name + '! Your message has been sent successfully.', 'success');
+                    contactForm.reset();
+                } else {
+                    const data = await response.json();
+                    if (data && data.errors && data.errors.length) {
+                        const errorMsg = data.errors.map(err => err.message).join(', ');
+                        showNotification(errorMsg, 'error');
+                    } else {
+                        showNotification('Failed to send message. Please reach out to akhileshlabd@gmail.com directly.', 'error');
+                    }
+                }
+            } catch (err) {
+                showNotification('Network error. Please email akhileshlabd@gmail.com directly.', 'error');
+            } finally {
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
-            }, 500);
+            }
         });
     }
 
