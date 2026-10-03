@@ -160,28 +160,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
+    // Skill progress bar animation on view
     skillCards.forEach(card => {
         skillObserver.observe(card);
-    });
-
-    // General fade-in animation for other elements
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                fadeObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Apply fade-in animation to project cards, experience cards, cert cards and other elements
-    const animatedElements = document.querySelectorAll('.project-card, .about__detail, .contact__item, .experience-card, .cert-card');
-    animatedElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        fadeObserver.observe(element);
     });
 
     // Contact form handling - sends message directly to Akhilesh's inbox via Formspree
@@ -330,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --------------------------------------------------------------------------
-    // Modern Feature 1: Smooth Bidirectional Hero Scroll Dissolve
+    // Modern Feature 1a: Smooth Bidirectional Hero Scroll Dissolve
     // (Slowly hides main section on scroll down; gracefully restores on scroll up)
     // --------------------------------------------------------------------------
     function updateHeroScrollDissolve() {
@@ -348,13 +329,90 @@ document.addEventListener('DOMContentLoaded', function() {
         const opacity = Math.max(0, 1 - eased * 1.05);
         const translateY = -(eased * 42);
         const scale = 1 - (eased * 0.05);
-        const blur = eased * 4;
+        const blur = eased * 4.5;
 
         heroContent.style.opacity = opacity.toFixed(3);
         heroContent.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
-        heroContent.style.filter = blur > 0.1 ? `blur(${blur.toFixed(1)}px)` : 'none';
+        heroContent.style.filter = blur > 0.15 ? `blur(${blur.toFixed(1)}px)` : 'none';
         heroContent.style.pointerEvents = opacity < 0.08 ? 'none' : 'auto';
         heroContent.style.visibility = opacity <= 0.01 ? 'hidden' : 'visible';
+    }
+
+    // --------------------------------------------------------------------------
+    // Modern Feature 1b: Cinematic Scroll Journey for All Sections
+    // (Render in with slide & unblur on scroll down; disappear & blur on more scroll down)
+    // --------------------------------------------------------------------------
+    const contentSections = document.querySelectorAll('section:not(.hero)');
+
+    function updateSectionScrollEffects() {
+        const vh = window.innerHeight;
+        const scrollY = window.scrollY;
+        const totalHeight = document.documentElement.scrollHeight;
+        const isNearBottom = (scrollY + vh) >= (totalHeight - 90);
+
+        contentSections.forEach((section) => {
+            const container = section.querySelector('.container');
+            if (!container) return;
+
+            const rect = section.getBoundingClientRect();
+
+            // When section is completely below viewport
+            if (rect.top >= vh) {
+                container.style.opacity = '0';
+                container.style.transform = 'translate3d(0, 48px, 0) scale(0.96)';
+                container.style.filter = 'blur(6px)';
+                container.style.pointerEvents = 'none';
+                return;
+            }
+
+            // When section is completely above viewport
+            if (rect.bottom <= 0) {
+                container.style.opacity = '0';
+                container.style.transform = 'translate3d(0, -48px, 0) scale(0.96)';
+                container.style.filter = 'blur(6px)';
+                container.style.pointerEvents = 'none';
+                return;
+            }
+
+            // 1. Entrance phase (entering from bottom)
+            const enterZone = vh * 0.6;
+            const enterProgress = Math.min(Math.max((vh * 0.95 - rect.top) / enterZone, 0), 1);
+
+            // 2. Exit phase (user scrolling past the section towards the top)
+            let exitProgress = 0;
+            const isContactAtBottom = isNearBottom && section.id === 'contact';
+
+            if (!isContactAtBottom && rect.bottom < vh * 0.6) {
+                const exitZone = vh * 0.6;
+                exitProgress = Math.min(Math.max((vh * 0.6 - rect.bottom) / exitZone, 0), 1);
+            }
+
+            if (exitProgress > 0) {
+                // SECTION IS EXITING (On more scroll down: disappear & blur)
+                const easedExit = Math.pow(exitProgress, 1.4);
+                const opacity = Math.max(0, 1 - easedExit * 1.05);
+                const translateY = -(easedExit * 42);
+                const scale = 1 - (easedExit * 0.04);
+                const blur = easedExit * 6;
+
+                container.style.opacity = opacity.toFixed(3);
+                container.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+                container.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none';
+                container.style.pointerEvents = opacity < 0.12 ? 'none' : 'auto';
+            } else {
+                // SECTION IS ENTERING OR IN ACTIVE VIEWING SWEET SPOT
+                const easedEnter = 1 - Math.pow(1 - enterProgress, 2);
+                const opacity = Math.min(1, Math.max(0, easedEnter)).toFixed(3);
+                const translateY = ((1 - easedEnter) * 48).toFixed(1);
+                const scale = (0.96 + 0.04 * easedEnter).toFixed(3);
+                const blur = ((1 - easedEnter) * 5.5).toFixed(1);
+
+                container.style.opacity = opacity;
+                container.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+                container.style.filter = blur > 0.2 ? `blur(${blur}px)` : 'none';
+                container.style.pointerEvents = opacity < 0.12 ? 'none' : 'auto';
+            }
+        });
     }
 
     // --------------------------------------------------------------------------
@@ -404,6 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 handleScroll();
                 updateActiveNavLink();
                 updateHeroScrollDissolve();
+                updateSectionScrollEffects();
                 updateScrollProgressBar();
                 updateBackToTopButton();
                 isScrollTicking = false;
