@@ -277,55 +277,10 @@ a:hover {
   z-index: 1;
 }
 
-/* Ambient Glowing Mesh Orbs */
-.hero__ambient {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  -webkit-filter: blur(80px);
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.45;
-  transition: opacity 0.5s ease;
-}
-
-.hero__ambient--1 {
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, rgba(33, 128, 141, 0.35) 0%, rgba(50, 184, 198, 0.08) 60%, transparent 100%);
-  top: 10%;
-  left: -80px;
-  animation: floatOrb1 14s ease-in-out infinite alternate;
-}
-
-.hero__ambient--2 {
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle, rgba(230, 129, 97, 0.28) 0%, rgba(255, 209, 102, 0.08) 60%, transparent 100%);
-  bottom: 8%;
-  right: -60px;
-  animation: floatOrb2 16s ease-in-out infinite alternate;
-}
-
-@keyframes floatOrb1 {
-  0% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(50px, 35px, 0) scale(1.1); }
-  100% { transform: translate3d(20px, -25px, 0) scale(0.95); }
-}
-
-@keyframes floatOrb2 {
-  0% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(-40px, -35px, 0) scale(1.12); }
-  100% { transform: translate3d(-15px, 25px, 0) scale(0.92); }
-}
-
 .hero__content {
   position: relative;
   z-index: 2;
   text-align: center;
-  will-change: transform, opacity;
-  transform-origin: center top;
-  transition: transform 0.05s linear, opacity 0.05s linear;
 }
 
 .hero__text {
@@ -1026,9 +981,7 @@ section.is-revealed > .container {
   left: 0;
   width: 100%;
   height: calc(100vh - 80px);
-  background-color: rgba(19, 52, 59, 0.45);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background-color: rgba(19, 52, 59, 0.6);
   z-index: 998;
   opacity: 0;
   transition: opacity var(--duration-normal) var(--ease-standard);
@@ -1349,7 +1302,7 @@ section.is-revealed > .container {
   top: 96px;
   right: 24px;
   max-width: 420px;
-  background: rgba(252, 252, 249, 0.96);
+  background: #ffffff;
   color: var(--color-text);
   border: 1.5px solid var(--color-primary);
   border-radius: var(--radius-lg);
@@ -1358,8 +1311,6 @@ section.is-revealed > .container {
   align-items: center;
   gap: 14px;
   box-shadow: 0 12px 36px rgba(19, 52, 59, 0.22), 0 0 20px rgba(33, 128, 141, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   z-index: 100002;
   opacity: 0;
   visibility: hidden;

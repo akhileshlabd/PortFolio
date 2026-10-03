@@ -754,8 +754,7 @@ select.form-control {
 
 .header.scrolled {
   box-shadow: var(--shadow-md);
-  background-color: rgba(var(--color-surface), 0.95);
-  backdrop-filter: blur(10px);
+  background-color: var(--color-surface);
 }
 
 .nav {

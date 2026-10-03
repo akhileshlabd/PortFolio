@@ -310,22 +310,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
 
-    // --------------------------------------------------------------------------
-    // Modern Feature 1a: Subtle Hero Parallax Fade (100% Crisp & User-Friendly)
-    // --------------------------------------------------------------------------
-    function updateHeroScrollDissolve() {
-        if (!heroContent) return;
-        const scrollY = window.scrollY;
-        const fadeDistance = 450;
-        const progress = Math.min(Math.max(scrollY / fadeDistance, 0), 1);
-        
-        const opacity = Math.max(0, 1 - progress * 0.95);
-        const translateY = -(progress * 28);
-
-        heroContent.style.opacity = opacity.toFixed(3);
-        heroContent.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0)`;
-        heroContent.style.pointerEvents = opacity < 0.1 ? 'none' : 'auto';
-    }
 
     // --------------------------------------------------------------------------
     // Modern Feature 1b: Classic Stable Section Reveal (Zero Dimming While Reading)
@@ -393,7 +377,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.requestAnimationFrame(() => {
                 handleScroll();
                 updateActiveNavLink();
-                updateHeroScrollDissolve();
                 updateScrollProgressBar();
                 updateBackToTopButton();
                 isScrollTicking = false;
