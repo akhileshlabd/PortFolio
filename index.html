@@ -2,22 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Akhilesh Lalkumar | Senior Salesforce Consultant & Solutions Architect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akhilesh Lalkumar - Senior Salesforce Consultant & Developer</title>
     <meta name="description" content="Akhilesh Lalkumar - Senior Salesforce Consultant at Ernst & Young Global Delivery Services (EY GDS). 5+ years of experience specializing in Experience Cloud, Lightning Web Components, Apex, Flows, and Field Service.">
-    <meta name="theme-color" content="#ffffff">
-
-    <!-- OpenGraph Metadata -->
-    <meta property="og:title" content="Akhilesh Lalkumar | Senior Salesforce Consultant">
-    <meta property="og:description" content="Senior Salesforce Consultant at EY GDS with 5+ years of experience delivering scalable enterprise architectures.">
+    <meta property="og:title" content="Akhilesh Lalkumar - Senior Salesforce Consultant & Developer">
+    <meta property="og:description" content="Senior Salesforce Consultant at EY GDS with 5+ years of experience in Experience Cloud, LWC, Apex, Flows, and Field Service.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://akhileshlalkumar.com">
-
-    <!-- Google Fonts - International Standard Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="icon.png">
 </head>
@@ -25,165 +16,79 @@
     <!-- Header -->
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="#home" class="nav__brand">
-                <div class="nav__logo-badge">AL</div>
-                <div class="nav__brand-info">
-                    <h3>Akhilesh Lalkumar</h3>
-                    <span>Salesforce Consultant</span>
-                </div>
-            </a>
-
+            <div class="nav__brand">
+                <h3>Akhilesh Lalkumar</h3>
+            </div>
             <div class="nav__menu" id="nav-menu">
-                <a href="#home" class="nav__link active">Home</a>
+                <a href="#home" class="nav__link">Home</a>
                 <a href="#about" class="nav__link">About</a>
                 <a href="#experience" class="nav__link">Experience</a>
                 <a href="#skills" class="nav__link">Skills</a>
                 <a href="#projects" class="nav__link">Projects</a>
                 <a href="#contact" class="nav__link">Contact</a>
             </div>
-
-            <div class="nav__actions">
-                <a href="Akhilesh2025.pdf" class="btn btn--primary btn--sm" download="Akhilesh_Lalkumar_Resume.pdf">
-                    Resume
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                </a>
-                <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+            <div class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </nav>
     </header>
 
-    <!-- Mobile Navigation Overlay -->
+    <!-- Mobile Drawer Overlay -->
     <div class="nav__overlay" id="nav-overlay"></div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero__content container">
-            <div class="hero__status">
-                <span class="status-dot"></span>
-                Senior Salesforce Consultant &bull; EY GDS
-            </div>
-
-            <h1 class="hero__title">
-                Akhilesh <span class="hero__title-accent">Lalkumar</span>
-            </h1>
-
-            <h2 class="hero__subtitle">
-                Architecting Scalable Salesforce & Experience Cloud Platforms
-            </h2>
-
-            <p class="hero__description">
-                Senior Consultant with 5+ years of experience leading technical discovery, digital portal delivery, and enterprise Salesforce architectures for Fortune 500 and global organizations.
-            </p>
-
-            <div class="hero__actions">
-                <a href="#projects" class="btn btn--primary">
-                    View Projects
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-                <a href="Akhilesh2025.pdf" class="btn btn--secondary" download="Akhilesh_Lalkumar_Resume.pdf">
-                    Download CV (PDF)
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                </a>
-                <a href="https://linkedin.com/in/akhilesh-lalkumar" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
-                    LinkedIn Profile
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.81a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z"/></svg>
-                </a>
-                <a href="#contact" class="btn btn--secondary">
-                    Get In Touch
-                </a>
-            </div>
-
-            <!-- International Metric Showcase -->
-            <div class="hero__stats">
-                <div class="hero__stat-item">
-                    <span class="hero__stat-number">5+</span>
-                    <span class="hero__stat-label">Years Experience</span>
-                </div>
-                <div class="hero__stat-item">
-                    <span class="hero__stat-number">3x</span>
-                    <span class="hero__stat-label">Salesforce Certified</span>
-                </div>
-                <div class="hero__stat-item">
-                    <span class="hero__stat-number">80+</span>
-                    <span class="hero__stat-label">Engineers Mentored</span>
-                </div>
-                <div class="hero__stat-item">
-                    <span class="hero__stat-number">2x</span>
-                    <span class="hero__stat-label">Applause Awards</span>
+            <div class="hero__text">
+                <h1 class="hero__title">Akhilesh Lalkumar</h1>
+                <h2 class="hero__subtitle">Senior Salesforce Consultant | Architecting Scalable Solutions</h2>
+                <p class="hero__tagline">EY Global Delivery Services | 5+ Years Experience | Salesforce Certified (PD I, PD II, Admin)</p>
+                <div class="hero__actions">
+                    <a href="#projects" class="btn btn--primary">View Projects</a>
+                    <a href="Akhilesh2025.pdf" class="btn btn--secondary" download="Akhilesh_Lalkumar_Resume.pdf">Download Resume (PDF)</a>
+                    <a href="https://linkedin.com/in/akhilesh-lalkumar" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Connect on LinkedIn</a>
+                    <a href="#contact" class="btn btn--secondary">Get In Touch</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about section--alt" id="about">
+    <section class="about" id="about">
         <div class="container">
             <div class="section__header">
-                <div class="section__tag">Profile Overview</div>
-                <h2 class="section__title">Engineering Scalable Salesforce Solutions</h2>
-                <p class="section__subtitle">Dedicated Salesforce Consultant translating complex business challenges into seamless digital ecosystems.</p>
+                <h2 class="section__title">About Me</h2>
+                <p class="section__subtitle">Dedicated Salesforce Consultant & Developer delivering high-performing enterprise architectures</p>
             </div>
-
-            <div class="about__grid">
-                <!-- Profile Card -->
-                <div class="about__profile-card">
-                    <div class="about__photo-wrapper">
-                        <img src="Akhil_Informal2.jpg" alt="Akhilesh Lalkumar" class="about__photo">
-                    </div>
-                    <h3>Akhilesh Lalkumar</h3>
-                    <div class="about__role">Senior Salesforce Consultant</div>
-                    <div class="about__profile-meta">
-                        <div class="about__meta-row">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            <span>Kochi, Kerala, India</span>
-                        </div>
-                        <div class="about__meta-row">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-                            <span>akhileshlabd@gmail.com</span>
-                        </div>
-                        <div class="about__meta-row">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.81a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z"/></svg>
-                            <span>linkedin.com/in/akhilesh-lalkumar</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Text & Specifications -->
-                <div class="about__content">
-                    <p>
-                        As a dedicated Salesforce Developer with 5+ years of experience, I take pride in delivering thoughtful, scalable solutions and leading technical discovery across complex platforms. Currently working as a <strong>Senior Salesforce Consultant at Ernst & Young Global Delivery Services (EY GDS)</strong>, I specialize in translating complex business requirements into high-performing, maintainable enterprise architectures.
-                    </p>
-                    <p>
-                        My core focus centers on architecting self-service, partner, and customer portals within <strong>Experience Cloud (Community Cloud)</strong>, leveraging modern <strong>Lightning Web Components (LWC)</strong>, advanced <strong>Flows</strong>, and robust <strong>Apex backend services</strong>. I bring extensive experience in Field Service (FSL), high-integrity data migration, and multi-system integrations while maintaining strict platform governance and test coverage.
-                    </p>
-
-                    <div class="about__details-grid">
-                        <div class="about__detail-box">
+            <div class="about__content">
+                <div class="about__text">
+                    <p>As a dedicated Salesforce Developer with 5+ years of experience, I take pride in maintaining high levels of client satisfaction, leading technical discovery, and executing seamless platform solutions. Currently working as a Senior Salesforce Consultant at Ernst & Young Global Delivery Services (EY GDS), I specialize in translating complex business requirements into high-performing, scalable architectures.</p>
+                    <p>My core focus centers on architecting self-service, partner, and customer portals within Experience Cloud (Community Cloud), leveraging modern Lightning Web Components (LWC), advanced Flows, robust Apex backend services, and Field Service Lightning (FSL)—all while maintaining strict platform governance, rigorous test classes, and industry security standards.</p>
+                    <div class="about__details">
+                        <div class="about__detail">
                             <h4>Current Role</h4>
                             <p>Senior Consultant I at Ernst & Young Global Delivery Services (EY GDS)</p>
                         </div>
-                        <div class="about__detail-box">
+                        <div class="about__detail">
                             <h4>Experience</h4>
-                            <p>5+ Years in Enterprise Salesforce Development & Consulting</p>
+                            <p>5+ Years in Salesforce Development & Consulting</p>
                         </div>
-                        <div class="about__detail-box">
+                        <div class="about__detail">
                             <h4>Education</h4>
                             <p>M.Tech in Computer & Information Science, Cochin University of Science & Technology (CUSAT)</p>
                         </div>
-                        <div class="about__detail-box">
+                        <div class="about__detail">
+                            <h4>Location</h4>
+                            <p>Kochi, Kerala, India</p>
+                        </div>
+                        <div class="about__detail">
                             <h4>Certifications</h4>
-                            <p>Salesforce Certified Platform Developer I & II, Certified Administrator</p>
+                            <p>Platform Developer I, Platform Developer II, Salesforce Certified Administrator</p>
                         </div>
-                        <div class="about__detail-box">
-                            <h4>Leadership & Mentorship</h4>
-                            <p>Directed Train-To-Hire program for 80+ candidates; conducted hackathons & curriculum design</p>
-                        </div>
-                        <div class="about__detail-box">
-                            <h4>Awards & Honors</h4>
+                        <div class="about__detail">
+                            <h4>Honours & Awards</h4>
                             <p>2x Applause Award Winner (Absyz) & Smart India Hackathon Runner-up</p>
                         </div>
                     </div>
@@ -196,20 +101,17 @@
     <section class="experience" id="experience">
         <div class="container">
             <div class="section__header">
-                <div class="section__tag">Career Journey</div>
                 <h2 class="section__title">Work Experience</h2>
-                <p class="section__subtitle">Track record of delivering enterprise-scale Salesforce transformations.</p>
+                <p class="section__subtitle">Enterprise consulting and technical leadership journey</p>
             </div>
-
-            <div class="experience__timeline">
-                <!-- Role 1: EY GDS -->
+            <div class="experience__grid">
                 <div class="experience-card">
                     <div class="experience-card__header">
                         <div>
                             <h3 class="experience-card__role">Senior Consultant I</h3>
                             <div class="experience-card__company">Ernst & Young Global Delivery Services</div>
                         </div>
-                        <span class="experience-card__period experience-card__period--current">Nov 2025 &mdash; Present</span>
+                        <span class="experience-card__badge experience-card__badge--present">Nov 2025 - Present</span>
                     </div>
                     <p class="experience-card__description">
                         Lead technical discovery and solution delivery by translating complex business requirements into high-performing, scalable architectures. Focus centers on architecting self-service, partner, and customer portals within Experience Cloud (Community Cloud), leveraging modern Lightning Web Components (LWC), advanced Flows, and robust Apex backend services while upholding platform governance and security standards.
@@ -229,14 +131,13 @@
                     </div>
                 </div>
 
-                <!-- Role 2: Absyz -->
                 <div class="experience-card">
                     <div class="experience-card__header">
                         <div>
                             <h3 class="experience-card__role">Software Engineer</h3>
                             <div class="experience-card__company">Absyz Software Consulting Pvt. Ltd.</div>
                         </div>
-                        <span class="experience-card__period">Feb 2021 &mdash; Nov 2025</span>
+                        <span class="experience-card__badge">Feb 2021 - Nov 2025</span>
                     </div>
                     <p class="experience-card__description">
                         Took full ownership of critical project tracks and POC modules across Experience Cloud, Sales Cloud, and Field Service Lightning (FSL). Led development of custom forms with LWC and reusable lookup components, executed Lightning migrations, and maintained data dictionaries and deployments.
@@ -261,71 +162,13 @@
         </div>
     </section>
 
-    <!-- Skills & Certifications Section -->
-    <section class="skills section--alt" id="skills">
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
         <div class="container">
             <div class="section__header">
-                <div class="section__tag">Expertise & Credentials</div>
-                <h2 class="section__title">Skills & Certifications</h2>
-                <p class="section__subtitle">Validated technical mastery across Salesforce platforms and modern development practices.</p>
+                <h2 class="section__title">Technical Skills</h2>
+                <p class="section__subtitle">Core Salesforce platform capabilities and specialized areas</p>
             </div>
-
-            <!-- Certifications Showcase -->
-            <div class="certifications-section">
-                <div class="certifications__grid">
-                    <div class="cert-card">
-                        <div class="cert-card__icon-wrap">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-                        </div>
-                        <div class="cert-card__content">
-                            <h4>Salesforce Platform Developer II</h4>
-                            <p>Advanced Apex, design patterns, integrations & test optimization</p>
-                        </div>
-                    </div>
-
-                    <div class="cert-card">
-                        <div class="cert-card__icon-wrap">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-                        </div>
-                        <div class="cert-card__content">
-                            <h4>Salesforce Platform Developer I</h4>
-                            <p>Custom application development & programmatic logic</p>
-                        </div>
-                    </div>
-
-                    <div class="cert-card">
-                        <div class="cert-card__icon-wrap">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        </div>
-                        <div class="cert-card__content">
-                            <h4>Salesforce Certified Administrator</h4>
-                            <p>Configuration, security, user administration & governance</p>
-                        </div>
-                    </div>
-
-                    <div class="cert-card">
-                        <div class="cert-card__icon-wrap cert-card__icon-wrap--gold">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>
-                        </div>
-                        <div class="cert-card__content">
-                            <h4>2x Applause Award Winner</h4>
-                            <p>Recognized for outstanding delivery impact & client satisfaction at Absyz</p>
-                        </div>
-                    </div>
-
-                    <div class="cert-card">
-                        <div class="cert-card__icon-wrap cert-card__icon-wrap--silver">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                        </div>
-                        <div class="cert-card__content">
-                            <h4>Smart India Hackathon Runner-Up</h4>
-                            <p>National technical innovation hackathon, Hubli, India</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Technical Skills Matrix -->
             <div class="skills__grid">
                 <div class="skill-card" data-skill="Lightning Web Components (LWC)" data-level="92">
                     <div class="skill-card__header">
@@ -333,86 +176,123 @@
                         <span class="skill-card__level">92%</span>
                     </div>
                     <div class="skill-card__bar">
-                        <div class="skill-card__progress"></div>
+                        <div class="skill-card__progress" style="width: 0"></div>
                     </div>
-                    <p class="skill-card__category">Frontend Development & Modern Reactive UI</p>
+                    <p class="skill-card__category">Frontend Development & Modern UI</p>
                 </div>
-
                 <div class="skill-card" data-skill="Experience Cloud (Community Cloud)" data-level="90">
                     <div class="skill-card__header">
                         <h3>Experience Cloud (Community Cloud)</h3>
                         <span class="skill-card__level">90%</span>
                     </div>
                     <div class="skill-card__bar">
-                        <div class="skill-card__progress"></div>
+                        <div class="skill-card__progress" style="width: 0"></div>
                     </div>
                     <p class="skill-card__category">Self-Service, Partner & Customer Portals</p>
                 </div>
-
                 <div class="skill-card" data-skill="Apex & Test Classes" data-level="88">
                     <div class="skill-card__header">
                         <h3>Apex & Test Classes</h3>
                         <span class="skill-card__level">88%</span>
                     </div>
                     <div class="skill-card__bar">
-                        <div class="skill-card__progress"></div>
+                        <div class="skill-card__progress" style="width: 0"></div>
                     </div>
-                    <p class="skill-card__category">Backend Architecture & Test Automation</p>
+                    <p class="skill-card__category">Backend Services & Test Automation</p>
                 </div>
-
                 <div class="skill-card" data-skill="Salesforce Flows (Lightning & Mobile)" data-level="86">
                     <div class="skill-card__header">
                         <h3>Salesforce Flows (Lightning & Mobile)</h3>
                         <span class="skill-card__level">86%</span>
                     </div>
                     <div class="skill-card__bar">
-                        <div class="skill-card__progress"></div>
+                        <div class="skill-card__progress" style="width: 0"></div>
                     </div>
-                    <p class="skill-card__category">Process Automation & Field Workflows</p>
+                    <p class="skill-card__category">Process Automation & Mobile Workflows</p>
                 </div>
-
                 <div class="skill-card" data-skill="Field Service Lightning (FSL)" data-level="82">
                     <div class="skill-card__header">
                         <h3>Field Service Lightning (FSL)</h3>
                         <span class="skill-card__level">82%</span>
                     </div>
                     <div class="skill-card__bar">
-                        <div class="skill-card__progress"></div>
+                        <div class="skill-card__progress" style="width: 0"></div>
                     </div>
                     <p class="skill-card__category">Work Orders, Scheduling & Dispatch</p>
                 </div>
-
                 <div class="skill-card" data-skill="SOQL & Data Migration" data-level="88">
                     <div class="skill-card__header">
                         <h3>SOQL & Data Migration</h3>
                         <span class="skill-card__level">88%</span>
                     </div>
                     <div class="skill-card__bar">
-                        <div class="skill-card__progress"></div>
+                        <div class="skill-card__progress" style="width: 0"></div>
                     </div>
-                    <p class="skill-card__category">Database Queries & High-Integrity Transfer</p>
+                    <p class="skill-card__category">Database Queries & Data Integrity</p>
                 </div>
-
                 <div class="skill-card" data-skill="Triggers & Validation Rules" data-level="86">
                     <div class="skill-card__header">
                         <h3>Triggers & Validation Rules</h3>
                         <span class="skill-card__level">86%</span>
                     </div>
                     <div class="skill-card__bar">
-                        <div class="skill-card__progress"></div>
+                        <div class="skill-card__progress" style="width: 0"></div>
                     </div>
-                    <p class="skill-card__category">Platform Customization & Business Logic</p>
+                    <p class="skill-card__category">Data Validation & Backend Logic</p>
                 </div>
-
                 <div class="skill-card" data-skill="Admin Configuration & Governance" data-level="85">
                     <div class="skill-card__header">
                         <h3>Admin Configuration & Governance</h3>
                         <span class="skill-card__level">85%</span>
                     </div>
                     <div class="skill-card__bar">
-                        <div class="skill-card__progress"></div>
+                        <div class="skill-card__progress" style="width: 0"></div>
                     </div>
                     <p class="skill-card__category">Security, Approvals & Platform Governance</p>
+                </div>
+            </div>
+
+            <!-- Certifications & Honours Section -->
+            <div class="certifications">
+                <div class="certifications__header">
+                    <h3>Certifications & Honours</h3>
+                </div>
+                <div class="certifications__grid">
+                    <div class="cert-card">
+                        <span class="cert-card__icon">🏅</span>
+                        <div class="cert-card__content">
+                            <h4>Salesforce Certified Platform Developer II</h4>
+                            <p>Advanced Apex, design patterns & integrations</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <span class="cert-card__icon">🏅</span>
+                        <div class="cert-card__content">
+                            <h4>Salesforce Certified Platform Developer I</h4>
+                            <p>Custom application development & programmatic logic</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <span class="cert-card__icon">🛡️</span>
+                        <div class="cert-card__content">
+                            <h4>Salesforce Certified Administrator</h4>
+                            <p>Configuration, security, user & data administration</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <span class="cert-card__icon">🏆</span>
+                        <div class="cert-card__content">
+                            <h4>2x Applause Award Winner</h4>
+                            <p>Recognized for outstanding delivery & client satisfaction (Absyz)</p>
+                        </div>
+                    </div>
+                    <div class="cert-card">
+                        <span class="cert-card__icon">🥈</span>
+                        <div class="cert-card__content">
+                            <h4>Smart India Hackathon 2019 Runner-Up</h4>
+                            <p>National level technical hackathon, Hubli, India</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -422,101 +302,91 @@
     <section class="projects" id="projects">
         <div class="container">
             <div class="section__header">
-                <div class="section__tag">Client Engagements</div>
-                <h2 class="section__title">Featured Projects</h2>
-                <p class="section__subtitle">Scalable enterprise solutions engineered for global performance and reliability.</p>
+                <h2 class="section__title">Featured Client Engagements</h2>
+                <p class="section__subtitle">Scalable enterprise Salesforce solutions delivering measurable impact</p>
             </div>
-
             <div class="projects__grid">
-                <!-- Project 1 -->
                 <div class="project-card">
-                    <div>
-                        <span class="project-card__badge">US Enterprise &bull; HVAC & Manufacturing</span>
+                    <div class="project-card__content">
                         <h3 class="project-card__title">Experience & Commerce Cloud Enterprise Portal</h3>
-                        <p class="project-card__description">
-                            Leading the Experience Cloud stream in collaboration with Commerce Cloud for a leading US-based HVAC & manufacturing enterprise, architecting self-service, partner, and customer portal solutions.
-                        </p>
-                        <ul class="project-card__highlights">
-                            <li>Unified digital portal architecture with Commerce Cloud</li>
-                            <li>Customized self-service support tiles designed in LWC</li>
-                            <li>Streamlined support operations & improved customer journeys</li>
-                        </ul>
-                    </div>
-                    <div class="project-card__tech">
-                        <span class="tech-tag">Experience Cloud</span>
-                        <span class="tech-tag">Commerce Cloud</span>
-                        <span class="tech-tag">LWC</span>
-                        <span class="tech-tag">Flows</span>
-                        <span class="tech-tag">Apex</span>
+                        <p class="project-card__description">Leading the Experience Cloud stream in collaboration with Commerce Cloud for a leading US-based HVAC & manufacturing enterprise, architecting self-service, partner, and customer portal solutions.</p>
+                        <div class="project-card__tech">
+                            <span class="tech-tag">Experience Cloud</span>
+                            <span class="tech-tag">Commerce Cloud</span>
+                            <span class="tech-tag">LWC</span>
+                            <span class="tech-tag">Flows</span>
+                            <span class="tech-tag">Apex</span>
+                        </div>
+                        <div class="project-card__highlights">
+                            <ul>
+                                <li>Unified digital portal architecture</li>
+                                <li>Customized self-service support tiles in LWC</li>
+                                <li>Streamlined operations & enhanced user journeys</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
                 <div class="project-card">
-                    <div>
-                        <span class="project-card__badge">Manufacturing Leader &bull; India</span>
+                    <div class="project-card__content">
                         <h3 class="project-card__title">Field Service (FSL) Operations Optimization</h3>
-                        <p class="project-card__description">
-                            Built custom solutions in Salesforce Field Service (FSL) for a leading India-based tile manufacturer to streamline service management, automate job scheduling, and coordinate field agents with central systems.
-                        </p>
-                        <ul class="project-card__highlights">
-                            <li>Tailored Mobile flows for field technicians on duty</li>
-                            <li>Automated job scheduling & dispatch workflows</li>
-                            <li>Optimized Work Order and Service Appointment lifecycles</li>
-                        </ul>
-                    </div>
-                    <div class="project-card__tech">
-                        <span class="tech-tag">Field Service (FSL)</span>
-                        <span class="tech-tag">Mobile Flows</span>
-                        <span class="tech-tag">Work Orders</span>
-                        <span class="tech-tag">Scheduling</span>
-                        <span class="tech-tag">Apex</span>
+                        <p class="project-card__description">Built custom solutions in Salesforce Field Service (FSL) for a leading India-based tile manufacturer to streamline service management, automate job scheduling, and coordinate field agents with central systems.</p>
+                        <div class="project-card__tech">
+                            <span class="tech-tag">Field Service (FSL)</span>
+                            <span class="tech-tag">Mobile Flows</span>
+                            <span class="tech-tag">Apex</span>
+                            <span class="tech-tag">Work Orders</span>
+                            <span class="tech-tag">Scheduling</span>
+                        </div>
+                        <div class="project-card__highlights">
+                            <ul>
+                                <li>Custom Mobile flows for field technicians</li>
+                                <li>Automated job scheduling & dispatch workflows</li>
+                                <li>Optimized Work Order & Service Appointment handling</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Project 3 -->
                 <div class="project-card">
-                    <div>
-                        <span class="project-card__badge">Fleet & Parking Solutions &bull; USA</span>
+                    <div class="project-card__content">
                         <h3 class="project-card__title">Sales Cloud Leasing Platform & Data Migration</h3>
-                        <p class="project-card__description">
-                            Customized Salesforce Sales Cloud for a US-based vehicle leasing and parking solutions company, developing custom LWC to enhance leasing management and executing seamless historical data migration.
-                        </p>
-                        <ul class="project-card__highlights">
-                            <li>Custom LWC for vehicle leasing management operations</li>
-                            <li>Seamless historical data transfer preserving data integrity</li>
-                            <li>Optimized operational workflows for customer vehicle leases</li>
-                        </ul>
-                    </div>
-                    <div class="project-card__tech">
-                        <span class="tech-tag">Sales Cloud</span>
-                        <span class="tech-tag">LWC</span>
-                        <span class="tech-tag">Data Migration</span>
-                        <span class="tech-tag">Apex</span>
-                        <span class="tech-tag">SOQL</span>
+                        <p class="project-card__description">Customized Salesforce Sales Cloud for a US-based vehicle leasing and parking solutions company, developing custom LWC to enhance leasing management and executing seamless historical data migration.</p>
+                        <div class="project-card__tech">
+                            <span class="tech-tag">Sales Cloud</span>
+                            <span class="tech-tag">LWC</span>
+                            <span class="tech-tag">Data Migration</span>
+                            <span class="tech-tag">Apex</span>
+                            <span class="tech-tag">SOQL</span>
+                        </div>
+                        <div class="project-card__highlights">
+                            <ul>
+                                <li>Custom LWC for vehicle leasing management</li>
+                                <li>Seamless historical data transfer with high integrity</li>
+                                <li>Optimized operational workflows for customer management</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Project 4 -->
                 <div class="project-card">
-                    <div>
-                        <span class="project-card__badge">Financial Authority &bull; UAE</span>
+                    <div class="project-card__content">
                         <h3 class="project-card__title">Financial Compliance & Governance Platform</h3>
-                        <p class="project-card__description">
-                            Engineered custom solutions for a prominent UAE financial regulatory authority, developing custom LWC forms with reusable lookup child components, automated workflows, and multi-system integrations.
-                        </p>
-                        <ul class="project-card__highlights">
-                            <li>Reusable child LWC for custom lookup operations</li>
-                            <li>Automated compliance tracking & regulatory reporting</li>
-                            <li>Multi-system integrations supporting stringent governance</li>
-                        </ul>
-                    </div>
-                    <div class="project-card__tech">
-                        <span class="tech-tag">Experience Cloud</span>
-                        <span class="tech-tag">LWC</span>
-                        <span class="tech-tag">Compliance Workflows</span>
-                        <span class="tech-tag">Integrations</span>
-                        <span class="tech-tag">Apex</span>
+                        <p class="project-card__description">Engineered custom solutions for a prominent UAE financial regulatory authority, developing custom LWC forms with reusable lookup child components, automated workflows, and multi-system integrations.</p>
+                        <div class="project-card__tech">
+                            <span class="tech-tag">Experience Cloud</span>
+                            <span class="tech-tag">LWC</span>
+                            <span class="tech-tag">Compliance Workflows</span>
+                            <span class="tech-tag">Integrations</span>
+                            <span class="tech-tag">Apex</span>
+                        </div>
+                        <div class="project-card__highlights">
+                            <ul>
+                                <li>Reusable child LWC for custom lookup operations</li>
+                                <li>Automated compliance tracking & regulatory reporting</li>
+                                <li>Multi-system integration supporting stringent governance</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -524,92 +394,54 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact section--alt" id="contact">
+    <section class="contact" id="contact">
         <div class="container">
             <div class="section__header">
-                <div class="section__tag">Professional Network</div>
                 <h2 class="section__title">Get In Touch</h2>
-                <p class="section__subtitle">Always open to connecting with fellow professionals, sharing ideas, or discussing Salesforce technologies.</p>
+                <p class="section__subtitle">Always open to connecting with fellow professionals, sharing ideas, or discussing Salesforce technologies</p>
             </div>
-
-            <div class="contact__grid">
-                <!-- Direct Contact Cards -->
-                <div class="contact__cards">
-                    <a href="mailto:akhileshlabd@gmail.com" class="contact__card">
-                        <div class="contact__card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-                        </div>
-                        <div class="contact__card-info">
-                            <h4>Direct Email</h4>
-                            <p>akhileshlabd@gmail.com</p>
-                        </div>
+            <div class="contact__content">
+                <div class="contact__info">
+                    <a href="mailto:akhileshlabd@gmail.com" class="contact__item">
+                        <h4>Email</h4>
+                        <p>akhileshlabd@gmail.com</p>
                     </a>
-
-                    <a href="tel:+918848934232" class="contact__card">
-                        <div class="contact__card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        </div>
-                        <div class="contact__card-info">
-                            <h4>Phone</h4>
-                            <p>+91 - 8848934232</p>
-                        </div>
+                    <a href="tel:+918848934232" class="contact__item">
+                        <h4>Phone</h4>
+                        <p>+91 - 8848934232</p>
                     </a>
-
-                    <a href="https://linkedin.com/in/akhilesh-lalkumar" target="_blank" rel="noopener noreferrer" class="contact__card">
-                        <div class="contact__card-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.81a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z"/></svg>
-                        </div>
-                        <div class="contact__card-info">
-                            <h4>LinkedIn</h4>
-                            <p>linkedin.com/in/akhilesh-lalkumar</p>
-                        </div>
+                    <a href="https://linkedin.com/in/akhilesh-lalkumar" target="_blank" rel="noopener noreferrer" class="contact__item">
+                        <h4>LinkedIn</h4>
+                        <p>linkedin.com/in/akhilesh-lalkumar</p>
                     </a>
-
-                    <div class="contact__card">
-                        <div class="contact__card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        </div>
-                        <div class="contact__card-info">
-                            <h4>Location</h4>
-                            <p>Kochi, Kerala, India</p>
-                        </div>
+                    <div class="contact__item">
+                        <h4>Location</h4>
+                        <p>Kochi, Kerala, India</p>
                     </div>
                 </div>
-
-                <!-- Formspree Connected Form -->
-                <div class="contact__form-wrapper">
-                    <form class="contact__form" id="contact-form" action="https://formspree.io/f/meaobvwb" method="POST">
-                        <div class="form-group">
-                            <label for="name" class="form-label">Full Name</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="name@company.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea id="message" name="message" rows="5" class="form-control" placeholder="Write your message here..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn--primary btn--full-width">
-                            Send Message
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                        </button>
-                    </form>
-                </div>
+                <form class="contact__form" id="contact-form" action="https://formspree.io/f/meaobvwb" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" rows="5" class="form-control" placeholder="Write your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container footer__content">
+        <div class="container">
             <p>&copy; 2026 Akhilesh Lalkumar. All rights reserved.</p>
-            <div class="footer__links">
-                <a href="#home">Back to Top &uarr;</a>
-                <a href="https://linkedin.com/in/akhilesh-lalkumar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="mailto:akhileshlabd@gmail.com">Email</a>
-            </div>
         </div>
     </footer>
 
