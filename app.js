@@ -311,116 +311,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --------------------------------------------------------------------------
-    // Modern Feature 1a: Smooth Bidirectional Hero Scroll Dissolve (100% Crisp)
-    // (Slowly hides main section on scroll down; gracefully restores on scroll up)
+    // Modern Feature 1a: Subtle Hero Parallax Fade (100% Crisp & User-Friendly)
     // --------------------------------------------------------------------------
     function updateHeroScrollDissolve() {
         if (!heroContent) return;
         const scrollY = window.scrollY;
-        const heroSection = document.getElementById('home');
-        const heroHeight = heroSection ? heroSection.offsetHeight : 600;
-        
-        // Dissolve smoothly through the first 450px of scroll
-        const fadeDistance = Math.min(heroHeight * 0.72, 450);
+        const fadeDistance = 450;
         const progress = Math.min(Math.max(scrollY / fadeDistance, 0), 1);
         
-        // Smooth quadratic easing for natural dissolution (zero blur, completely crisp)
-        const eased = 1 - Math.pow(1 - progress, 2);
-        const opacity = Math.max(0, 1 - eased * 1.05);
-        const translateY = -(eased * 42);
-        const scale = 1 - (eased * 0.04);
+        const opacity = Math.max(0, 1 - progress * 0.95);
+        const translateY = -(progress * 28);
 
         heroContent.style.opacity = opacity.toFixed(3);
-        heroContent.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
-        heroContent.style.filter = 'none';
-        heroContent.style.pointerEvents = opacity < 0.08 ? 'none' : 'auto';
-        heroContent.style.visibility = opacity <= 0.01 ? 'hidden' : 'visible';
+        heroContent.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0)`;
+        heroContent.style.pointerEvents = opacity < 0.1 ? 'none' : 'auto';
     }
 
     // --------------------------------------------------------------------------
-    // Modern Feature 1b: Classic Scroll Journey for All Sections (100% Crisp)
-    // (Render in with smooth parallax rise on scroll down; elegant fade on more scroll down)
+    // Modern Feature 1b: Classic Stable Section Reveal (Zero Dimming While Reading)
     // --------------------------------------------------------------------------
     const contentSections = document.querySelectorAll('section:not(.hero)');
-
-    function updateSectionScrollEffects() {
-        const vh = window.innerHeight;
-        const scrollY = window.scrollY;
-        const totalHeight = document.documentElement.scrollHeight;
-        const isNearBottom = (scrollY + vh) >= (totalHeight - 90);
-
-        contentSections.forEach((section) => {
-            const container = section.querySelector('.container');
-            if (!container) return;
-
-            const rect = section.getBoundingClientRect();
-
-            // When section is completely below viewport
-            if (rect.top >= vh) {
-                container.style.opacity = '0';
-                container.style.transform = 'translate3d(0, 44px, 0) scale(0.975)';
-                container.style.filter = 'none';
-                container.style.pointerEvents = 'none';
-                section.classList.remove('is-active');
-                return;
-            }
-
-            // When section is completely above viewport
-            if (rect.bottom <= 0) {
-                container.style.opacity = '0';
-                container.style.transform = 'translate3d(0, -44px, 0) scale(0.975)';
-                container.style.filter = 'none';
-                container.style.pointerEvents = 'none';
-                section.classList.remove('is-active');
-                return;
-            }
-
-            // 1. Entrance phase (entering from bottom with classic rise)
-            const enterZone = vh * 0.55;
-            const enterProgress = Math.min(Math.max((vh * 0.95 - rect.top) / enterZone, 0), 1);
-
-            // 2. Exit phase (user scrolling past the section towards the top)
-            let exitProgress = 0;
-            const isContactAtBottom = isNearBottom && section.id === 'contact';
-
-            if (!isContactAtBottom && rect.bottom < vh * 0.6) {
-                const exitZone = vh * 0.6;
-                exitProgress = Math.min(Math.max((vh * 0.6 - rect.bottom) / exitZone, 0), 1);
-            }
-
-            if (exitProgress > 0) {
-                // SECTION IS EXITING (On more scroll down: elegant classic fade out)
-                const easedExit = Math.pow(exitProgress, 1.4);
-                const opacity = Math.max(0, 1 - easedExit * 1.05);
-                const translateY = -(easedExit * 38);
-                const scale = 1 - (easedExit * 0.035);
-
-                container.style.opacity = opacity.toFixed(3);
-                container.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
-                container.style.filter = 'none';
-                container.style.pointerEvents = opacity < 0.12 ? 'none' : 'auto';
-                if (exitProgress > 0.4) {
-                    section.classList.remove('is-active');
-                }
-            } else {
-                // SECTION IS ENTERING OR IN ACTIVE VIEWING SWEET SPOT (Classic Rise)
-                const easedEnter = 1 - Math.pow(1 - enterProgress, 2);
-                const opacity = Math.min(1, Math.max(0, easedEnter)).toFixed(3);
-                const translateY = ((1 - easedEnter) * 44).toFixed(1);
-                const scale = (0.975 + 0.025 * easedEnter).toFixed(3);
-
-                container.style.opacity = opacity;
-                container.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
-                container.style.filter = 'none';
-                container.style.pointerEvents = opacity < 0.12 ? 'none' : 'auto';
-                if (enterProgress > 0.3) {
-                    section.classList.add('is-active');
-                } else {
-                    section.classList.remove('is-active');
-                }
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                entry.target.classList.add('is-active');
             }
         });
-    }
+    }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    contentSections.forEach(section => {
+        sectionObserver.observe(section);
+    });
 
     // --------------------------------------------------------------------------
     // Modern Feature 2: Scroll Progress Bar
@@ -469,7 +394,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 handleScroll();
                 updateActiveNavLink();
                 updateHeroScrollDissolve();
-                updateSectionScrollEffects();
                 updateScrollProgressBar();
                 updateBackToTopButton();
                 isScrollTicking = false;

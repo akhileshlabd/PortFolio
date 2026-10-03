@@ -931,12 +931,18 @@ section.is-active .section__title::after {
   max-width: 1280px;
 }
 
-/* Classic Dynamic Scroll Focus for Section Containers (100% Crisp, ZERO Blur) */
+/* Classic Section Entrance Animation (User-friendly, Crisp & Solid) */
 section:not(.hero) > .container {
-  will-change: transform, opacity;
-  transform-origin: center center;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.22s ease-out;
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+section.is-revealed > .container {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Footer */
