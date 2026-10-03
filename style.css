@@ -320,9 +320,9 @@ a:hover {
   position: relative;
   z-index: 2;
   text-align: center;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
   transform-origin: center top;
-  transition: transform 0.05s linear, opacity 0.05s linear, filter 0.05s linear;
+  transition: transform 0.05s linear, opacity 0.05s linear;
 }
 
 .hero__text {
@@ -446,7 +446,26 @@ section:first-of-type {
 .section__title {
   font-size: var(--font-size-3xl);
   color: var(--color-text);
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-12);
+  position: relative;
+  display: inline-block;
+}
+
+.section__title::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-teal-500), var(--color-orange-500));
+  border-radius: var(--radius-full);
+  margin: 10px auto 0 auto;
+  transform: scaleX(0.7);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), width 0.45s ease;
+}
+
+section.is-active .section__title::after {
+  transform: scaleX(1);
+  width: 68px;
 }
 
 .section__subtitle {
@@ -454,6 +473,17 @@ section:first-of-type {
   color: var(--color-text-secondary);
   max-width: 600px;
   margin: 0 auto;
+}
+
+/* Classic Card Micro-Elevation & Interaction */
+.experience-card,
+.project-card,
+.cert-card,
+.skill-card,
+.about__detail {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.25s ease;
 }
 
 /* About Section */
@@ -913,13 +943,12 @@ section:first-of-type {
   max-width: 1280px;
 }
 
-/* Cinematic Dynamic Scroll Focus for Section Containers */
+/* Classic Dynamic Scroll Focus for Section Containers (100% Crisp, ZERO Blur) */
 section:not(.hero) > .container {
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
   transform-origin: center center;
-  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.18s ease-out,
-              filter 0.18s ease-out;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.22s ease-out;
 }
 
 /* Footer */

@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --------------------------------------------------------------------------
-    // Modern Feature 1a: Smooth Bidirectional Hero Scroll Dissolve
+    // Modern Feature 1a: Smooth Bidirectional Hero Scroll Dissolve (100% Crisp)
     // (Slowly hides main section on scroll down; gracefully restores on scroll up)
     // --------------------------------------------------------------------------
     function updateHeroScrollDissolve() {
@@ -324,23 +324,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const fadeDistance = Math.min(heroHeight * 0.72, 450);
         const progress = Math.min(Math.max(scrollY / fadeDistance, 0), 1);
         
-        // Smooth quadratic easing for natural dissolution
+        // Smooth quadratic easing for natural dissolution (zero blur, completely crisp)
         const eased = 1 - Math.pow(1 - progress, 2);
         const opacity = Math.max(0, 1 - eased * 1.05);
         const translateY = -(eased * 42);
-        const scale = 1 - (eased * 0.05);
-        const blur = eased * 4.5;
+        const scale = 1 - (eased * 0.04);
 
         heroContent.style.opacity = opacity.toFixed(3);
         heroContent.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
-        heroContent.style.filter = blur > 0.15 ? `blur(${blur.toFixed(1)}px)` : 'none';
+        heroContent.style.filter = 'none';
         heroContent.style.pointerEvents = opacity < 0.08 ? 'none' : 'auto';
         heroContent.style.visibility = opacity <= 0.01 ? 'hidden' : 'visible';
     }
 
     // --------------------------------------------------------------------------
-    // Modern Feature 1b: Cinematic Scroll Journey for All Sections
-    // (Render in with slide & unblur on scroll down; disappear & blur on more scroll down)
+    // Modern Feature 1b: Classic Scroll Journey for All Sections (100% Crisp)
+    // (Render in with smooth parallax rise on scroll down; elegant fade on more scroll down)
     // --------------------------------------------------------------------------
     const contentSections = document.querySelectorAll('section:not(.hero)');
 
@@ -359,23 +358,25 @@ document.addEventListener('DOMContentLoaded', function() {
             // When section is completely below viewport
             if (rect.top >= vh) {
                 container.style.opacity = '0';
-                container.style.transform = 'translate3d(0, 48px, 0) scale(0.96)';
-                container.style.filter = 'blur(6px)';
+                container.style.transform = 'translate3d(0, 44px, 0) scale(0.975)';
+                container.style.filter = 'none';
                 container.style.pointerEvents = 'none';
+                section.classList.remove('is-active');
                 return;
             }
 
             // When section is completely above viewport
             if (rect.bottom <= 0) {
                 container.style.opacity = '0';
-                container.style.transform = 'translate3d(0, -48px, 0) scale(0.96)';
-                container.style.filter = 'blur(6px)';
+                container.style.transform = 'translate3d(0, -44px, 0) scale(0.975)';
+                container.style.filter = 'none';
                 container.style.pointerEvents = 'none';
+                section.classList.remove('is-active');
                 return;
             }
 
-            // 1. Entrance phase (entering from bottom)
-            const enterZone = vh * 0.6;
+            // 1. Entrance phase (entering from bottom with classic rise)
+            const enterZone = vh * 0.55;
             const enterProgress = Math.min(Math.max((vh * 0.95 - rect.top) / enterZone, 0), 1);
 
             // 2. Exit phase (user scrolling past the section towards the top)
@@ -388,29 +389,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (exitProgress > 0) {
-                // SECTION IS EXITING (On more scroll down: disappear & blur)
+                // SECTION IS EXITING (On more scroll down: elegant classic fade out)
                 const easedExit = Math.pow(exitProgress, 1.4);
                 const opacity = Math.max(0, 1 - easedExit * 1.05);
-                const translateY = -(easedExit * 42);
-                const scale = 1 - (easedExit * 0.04);
-                const blur = easedExit * 6;
+                const translateY = -(easedExit * 38);
+                const scale = 1 - (easedExit * 0.035);
 
                 container.style.opacity = opacity.toFixed(3);
                 container.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
-                container.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none';
+                container.style.filter = 'none';
                 container.style.pointerEvents = opacity < 0.12 ? 'none' : 'auto';
+                if (exitProgress > 0.4) {
+                    section.classList.remove('is-active');
+                }
             } else {
-                // SECTION IS ENTERING OR IN ACTIVE VIEWING SWEET SPOT
+                // SECTION IS ENTERING OR IN ACTIVE VIEWING SWEET SPOT (Classic Rise)
                 const easedEnter = 1 - Math.pow(1 - enterProgress, 2);
                 const opacity = Math.min(1, Math.max(0, easedEnter)).toFixed(3);
-                const translateY = ((1 - easedEnter) * 48).toFixed(1);
-                const scale = (0.96 + 0.04 * easedEnter).toFixed(3);
-                const blur = ((1 - easedEnter) * 5.5).toFixed(1);
+                const translateY = ((1 - easedEnter) * 44).toFixed(1);
+                const scale = (0.975 + 0.025 * easedEnter).toFixed(3);
 
                 container.style.opacity = opacity;
                 container.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
-                container.style.filter = blur > 0.2 ? `blur(${blur}px)` : 'none';
+                container.style.filter = 'none';
                 container.style.pointerEvents = opacity < 0.12 ? 'none' : 'auto';
+                if (enterProgress > 0.3) {
+                    section.classList.add('is-active');
+                } else {
+                    section.classList.remove('is-active');
+                }
             }
         });
     }
