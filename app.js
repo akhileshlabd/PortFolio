@@ -83,9 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
     // Smooth scrolling for navigation links - FIXED
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -135,9 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    window.addEventListener('scroll', updateActiveNavLink, { passive: true });
-    updateActiveNavLink(); // Initial call
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -335,47 +329,268 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
 
-    // Performance optimization: debounce scroll events
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
+    // --------------------------------------------------------------------------
+    // Modern Feature 1: Smooth Bidirectional Hero Scroll Dissolve
+    // (Slowly hides main section on scroll down; gracefully restores on scroll up)
+    // --------------------------------------------------------------------------
+    function updateHeroScrollDissolve() {
+        if (!heroContent) return;
+        const scrollY = window.scrollY;
+        const heroSection = document.getElementById('home');
+        const heroHeight = heroSection ? heroSection.offsetHeight : 600;
+        
+        // Dissolve smoothly through the first 450px of scroll
+        const fadeDistance = Math.min(heroHeight * 0.72, 450);
+        const progress = Math.min(Math.max(scrollY / fadeDistance, 0), 1);
+        
+        // Smooth quadratic easing for natural dissolution
+        const eased = 1 - Math.pow(1 - progress, 2);
+        const opacity = Math.max(0, 1 - eased * 1.05);
+        const translateY = -(eased * 42);
+        const scale = 1 - (eased * 0.05);
+        const blur = eased * 4;
+
+        heroContent.style.opacity = opacity.toFixed(3);
+        heroContent.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+        heroContent.style.filter = blur > 0.1 ? `blur(${blur.toFixed(1)}px)` : 'none';
+        heroContent.style.pointerEvents = opacity < 0.08 ? 'none' : 'auto';
+        heroContent.style.visibility = opacity <= 0.01 ? 'hidden' : 'visible';
     }
 
-    // Apply debouncing to scroll handlers
-    const debouncedScroll = debounce(() => {
-        handleScroll();
-        updateActiveNavLink();
-    }, 10);
+    // --------------------------------------------------------------------------
+    // Modern Feature 2: Scroll Progress Bar
+    // --------------------------------------------------------------------------
+    const scrollProgressBar = document.getElementById('scroll-progress-bar');
+    function updateScrollProgressBar() {
+        if (!scrollProgressBar) return;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (scrollHeight <= 0) {
+            scrollProgressBar.style.width = '0%';
+            return;
+        }
+        const pct = Math.min(100, Math.max(0, (window.scrollY / scrollHeight) * 100));
+        scrollProgressBar.style.width = pct.toFixed(1) + '%';
+    }
 
-    window.addEventListener('scroll', debouncedScroll);
+    // --------------------------------------------------------------------------
+    // Modern Feature 3: Floating Back-To-Top Button
+    // --------------------------------------------------------------------------
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    function updateBackToTopButton() {
+        if (!backToTopBtn) return;
+        if (window.scrollY > 380) {
+            backToTopBtn.classList.add('is-visible');
+        } else {
+            backToTopBtn.classList.remove('is-visible');
+        }
+    }
+
+    // --------------------------------------------------------------------------
+    // High-Performance Unified RAF Scroll Engine
+    // --------------------------------------------------------------------------
+    let isScrollTicking = false;
+    function onUnifiedScroll() {
+        if (!isScrollTicking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                updateActiveNavLink();
+                updateHeroScrollDissolve();
+                updateScrollProgressBar();
+                updateBackToTopButton();
+                isScrollTicking = false;
+            });
+            isScrollTicking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onUnifiedScroll, { passive: true });
+    onUnifiedScroll(); // Run immediately on load
 
     // Handle window resize
     window.addEventListener('resize', function() {
-        // Close mobile menu on resize
         if (window.innerWidth > 768) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+            closeMobileMenu();
         }
-
-        // Update active nav link and hero visibility
-        updateActiveNavLink();
+        onUnifiedScroll();
     });
 
-    // Add keyboard navigation support
+    // --------------------------------------------------------------------------
+    // Easter Eggs System: Toast Helper & Interactive Triggers
+    // --------------------------------------------------------------------------
+    function showEasterEggToast(icon, title, desc, duration = 6500) {
+        const toast = document.getElementById('easter-egg-toast');
+        const toastIcon = document.getElementById('easter-egg-toast-icon');
+        const toastTitle = document.getElementById('easter-egg-toast-title');
+        const toastDesc = document.getElementById('easter-egg-toast-desc');
+        const toastClose = document.getElementById('easter-egg-toast-close');
+
+        if (!toast) return;
+
+        if (toastIcon) toastIcon.textContent = icon;
+        if (toastTitle) toastTitle.textContent = title;
+        if (toastDesc) toastDesc.textContent = desc;
+
+        toast.classList.add('is-active');
+
+        if (toastClose) {
+            toastClose.onclick = () => {
+                toast.classList.remove('is-active');
+            };
+        }
+
+        clearTimeout(window._easterEggTimeout);
+        window._easterEggTimeout = setTimeout(() => {
+            toast.classList.remove('is-active');
+        }, duration);
+    }
+
+    // Easter Egg 1: The Konami Code ("Super Trailblazer Mode")
+    // Keys: ↑ ↑ ↓ ↓ ← → ← → B A
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+
+    function activateSuperTrailblazerMode() {
+        document.body.classList.add('super-trailblazer-mode');
+        
+        if (window.triggerMagicFireworks) {
+            window.triggerMagicFireworks();
+        }
+
+        showEasterEggToast(
+            '⚡',
+            'SUPER TRAILBLAZER DEV MODE! 🚀',
+            'Salesforce Flows, LWC, and Apex running at 1000% overclock! Cosmic aura active on cards for 10s.'
+        );
+
+        clearTimeout(window._superModeTimeout);
+        window._superModeTimeout = setTimeout(() => {
+            document.body.classList.remove('super-trailblazer-mode');
+        }, 10000);
+    }
+
     document.addEventListener('keydown', function(e) {
-        // Close mobile menu with Escape key
+        // Escape closes mobile menu
         if (e.key === 'Escape') {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+            closeMobileMenu();
+        }
+
+        // Konami detection
+        const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        const expectedKey = konamiCode[konamiIndex].length === 1 ? konamiCode[konamiIndex].toLowerCase() : konamiCode[konamiIndex];
+
+        if (key === expectedKey) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+                konamiIndex = 0;
+                activateSuperTrailblazerMode();
+            }
+        } else {
+            konamiIndex = 0;
         }
     });
+
+    // Easter Egg 2: Clicking Akhilesh's Name 5 Times Rapidly
+    const heroTitleElement = document.getElementById('hero-title') || document.querySelector('.hero__title');
+    if (heroTitleElement) {
+        let nameClickCount = 0;
+        let nameClickTimer = null;
+
+        heroTitleElement.addEventListener('click', function(e) {
+            nameClickCount++;
+            clearTimeout(nameClickTimer);
+
+            // Tactile feedback
+            heroTitleElement.style.transform = 'scale(0.97)';
+            setTimeout(() => { heroTitleElement.style.transform = ''; }, 120);
+
+            if (nameClickCount >= 5) {
+                nameClickCount = 0;
+                heroTitleElement.classList.add('gold-shimmer');
+
+                const rect = heroTitleElement.getBoundingClientRect();
+                if (window.triggerMagicSparkles) {
+                    window.triggerMagicSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2, 28, true);
+                }
+
+                showEasterEggToast(
+                    '🏆',
+                    'Code Detective Achievement Unlocked!',
+                    'You clicked Akhilesh 5 times! Certified Salesforce Mastermind aura unlocked.'
+                );
+
+                setTimeout(() => {
+                    heroTitleElement.classList.remove('gold-shimmer');
+                }, 6000);
+            } else {
+                nameClickTimer = setTimeout(() => {
+                    nameClickCount = 0;
+                }, 2200);
+            }
+        });
+    }
+
+    // Easter Egg 3: Interactive Developer Console API
+    window.akhilesh = {
+        help: function() {
+            console.log(
+                '%c⚡ Akhilesh Developer Console Commands:\n' +
+                ' • akhilesh.superMode()   - Toggle Super Trailblazer cosmic card auras\n' +
+                ' • akhilesh.fireworks()   - Launch screen-wide stardust fireworks\n' +
+                ' • akhilesh.skills()      - Inspect full architectural skill matrix\n' +
+                ' • akhilesh.contact()     - Quick direct channels',
+                'color: #21808d; font-weight: bold; font-size: 13px;'
+            );
+            return 'Ready for input. Try one of the commands above!';
+        },
+        superMode: function() {
+            activateSuperTrailblazerMode();
+            return '⚡ Super Trailblazer Mode toggled!';
+        },
+        fireworks: function() {
+            if (window.triggerMagicFireworks) {
+                window.triggerMagicFireworks();
+                return '🎆 Stardust fireworks launched!';
+            }
+            return 'Fireworks ready on pointer-capable screens.';
+        },
+        skills: function() {
+            console.table([
+                { 'Domain': 'Salesforce Core', 'Focus': 'Apex, Triggers, Batch/Queueable, Asynchronous Apex, Governor Limits' },
+                { 'Domain': 'Modern Frontend', 'Focus': 'Lightning Web Components (LWC), Experience Cloud, Aura, Responsive UI' },
+                { 'Domain': 'Platform Automation', 'Focus': 'Advanced Flow Architectures, Field Service Lightning (FSL), Integration' },
+                { 'Domain': 'Enterprise Governance', 'Focus': 'Large Data Volumes, Security Matrix, Code Quality, CI/CD pipelines' }
+            ]);
+            return '5+ Years of Proven Architecture.';
+        },
+        contact: function() {
+            console.log(
+                '%c📬 Get In Touch With Akhilesh:\nEmail: akhileshlabd@gmail.com\nLinkedIn: https://linkedin.com/in/akhilesh-lalkumar\nLocation: Kochi, India (EY GDS)',
+                'color: #21808d; font-weight: bold;'
+            );
+            return 'Looking forward to connecting!';
+        }
+    };
+
+    console.log(
+        '%c⚡ AKHILESH LALKUMAR | Senior Salesforce Consultant & Developer\n' +
+        '%cLooking under the hood? Try these interactive console commands:\n' +
+        ' 👉 akhilesh.help()        - List secret commands\n' +
+        ' 👉 akhilesh.superMode()   - Toggle cosmic card aura\n' +
+        ' 👉 akhilesh.fireworks()   - Launch stardust fireworks\n' +
+        ' 👉 akhilesh.skills()      - Inspect architectural matrix\n' +
+        ' 👉 akhilesh.contact()     - Direct contact info',
+        'color: #21808d; font-size: 15px; font-weight: bold; padding: 4px 0;',
+        'color: #13343b; font-size: 12px; font-family: monospace; line-height: 1.6;'
+    );
 
     // --------------------------------------------------------------------------
     // Magic Interactive Cursor & Stardust Trail (Desktop Only)
@@ -503,6 +718,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 particles.splice(0, particles.length - 120);
             }
         }
+
+        // Global bridges for Easter eggs and celebrations
+        window.triggerMagicSparkles = function(x, y, count = 20, burst = true) {
+            spawnSparkle(x, y, count, burst);
+        };
+
+        window.triggerMagicFireworks = function() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    const x = width * (0.15 + Math.random() * 0.7);
+                    const y = height * (0.15 + Math.random() * 0.55);
+                    spawnSparkle(x, y, 24, true);
+                }, i * 200);
+            }
+        };
 
         // Track mouse position
         window.addEventListener('mousemove', function(e) {
