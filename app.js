@@ -228,6 +228,72 @@ document.addEventListener('DOMContentLoaded', function() {
         return emailRegex.test(email);
     }
 
+    // --------------------------------------------------------------------------
+    // Interactive Project Category Filters
+    // --------------------------------------------------------------------------
+    const filterButtons = document.querySelectorAll('.project-filter-btn');
+    const projectCards = document.querySelectorAll('.projects__grid .project-card');
+
+    if (filterButtons.length > 0 && projectCards.length > 0) {
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+
+                filterButtons.forEach(b => {
+                    b.classList.remove('is-active');
+                    b.setAttribute('aria-selected', 'false');
+                });
+                this.classList.add('is-active');
+                this.setAttribute('aria-selected', 'true');
+
+                projectCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'block';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(12px)';
+                        requestAnimationFrame(() => {
+                            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        });
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+    // --------------------------------------------------------------------------
+    // 1-Click Email Copy Feature
+    // --------------------------------------------------------------------------
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = 'akhileshlabd@gmail.com';
+            const copyText = document.getElementById('copy-text');
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(() => {
+                    if (copyText) copyText.textContent = 'Copied! ✓';
+                    copyEmailBtn.classList.add('is-copied');
+                    showNotification('Email address copied to clipboard: ' + email, 'success');
+
+                    setTimeout(() => {
+                        if (copyText) copyText.textContent = 'Copy';
+                        copyEmailBtn.classList.remove('is-copied');
+                    }, 2500);
+                }).catch(() => {
+                    window.location.href = 'mailto:' + email;
+                });
+            } else {
+                window.location.href = 'mailto:' + email;
+            }
+        });
+    }
+
     // Notification system - FIXED with better styling
     function showNotification(message, type = 'info') {
         // Remove existing notifications
