@@ -377,5 +377,233 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    console.log('Akhilesh Lalkumar Portfolio - Enhanced with Hero Content Management! 🚀');
+    // --------------------------------------------------------------------------
+    // Magic Interactive Cursor & Stardust Trail (Desktop Only)
+    // --------------------------------------------------------------------------
+    function initMagicCursor() {
+        // Strict guard: only enable on devices with fine pointer (mouse/trackpad, not touch)
+        if (!window.matchMedia('(pointer: fine)').matches) return;
+
+        // Create DOM elements dynamically
+        const dot = document.createElement('div');
+        dot.className = 'cursor-dot';
+
+        const ring = document.createElement('div');
+        ring.className = 'cursor-ring';
+
+        const canvas = document.createElement('canvas');
+        canvas.id = 'cursor-sparkle-canvas';
+
+        document.body.appendChild(canvas);
+        document.body.appendChild(ring);
+        document.body.appendChild(dot);
+
+        const ctx = canvas.getContext('2d');
+        let dpr = window.devicePixelRatio || 1;
+
+        function resizeCanvas() {
+            dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            ctx.scale(dpr, dpr);
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Coordinates & tracking
+        let mouseX = -100;
+        let mouseY = -100;
+        let ringX = -100;
+        let ringY = -100;
+        let isVisible = false;
+        let lastSpawnX = -100;
+        let lastSpawnY = -100;
+
+        // Sparkle particles array
+        const particles = [];
+        const sparkleColors = ['#21808d', '#32b8c6', '#e68161', '#ffd166', '#ffffff'];
+
+        class SparkleParticle {
+            constructor(x, y, vx, vy, size, color, maxLife, shape) {
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+                this.size = size;
+                this.color = color;
+                this.maxLife = maxLife || (25 + Math.random() * 20);
+                this.life = this.maxLife;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.vRot = (Math.random() - 0.5) * 0.12;
+                this.shape = shape || (Math.random() > 0.35 ? 'star' : 'circle');
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.02; // very gentle gravity/float
+                this.vx *= 0.98; // slight drag
+                this.rotation += this.vRot;
+                this.life -= 1;
+            }
+
+            draw(context) {
+                const alpha = Math.max(0, this.life / this.maxLife);
+                context.save();
+                context.translate(this.x, this.y);
+                context.rotate(this.rotation);
+                context.globalAlpha = alpha;
+                context.fillStyle = this.color;
+                context.shadowBlur = 6;
+                context.shadowColor = this.color;
+
+                const currentSize = this.size * (0.35 + 0.65 * alpha);
+
+                if (this.shape === 'star') {
+                    // 4-pointed diamond sparkle
+                    context.beginPath();
+                    const spikes = 4;
+                    const outerRadius = currentSize;
+                    const innerRadius = currentSize * 0.22;
+                    let rot = (Math.PI / 2) * 3;
+                    const step = Math.PI / spikes;
+
+                    context.moveTo(0, -outerRadius);
+                    for (let i = 0; i < spikes; i++) {
+                        context.lineTo(Math.cos(rot) * outerRadius, Math.sin(rot) * outerRadius);
+                        rot += step;
+                        context.lineTo(Math.cos(rot) * innerRadius, Math.sin(rot) * innerRadius);
+                        rot += step;
+                    }
+                    context.lineTo(0, -outerRadius);
+                    context.closePath();
+                    context.fill();
+                } else {
+                    // Soft glowing circle
+                    context.beginPath();
+                    context.arc(0, 0, currentSize * 0.6, 0, Math.PI * 2);
+                    context.fill();
+                }
+
+                context.restore();
+            }
+        }
+
+        function spawnSparkle(x, y, count = 1, burst = false) {
+            for (let i = 0; i < count; i++) {
+                const angle = burst ? (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5 : Math.random() * Math.PI * 2;
+                const speed = burst ? 1.5 + Math.random() * 3.5 : 0.3 + Math.random() * 1.2;
+                const vx = Math.cos(angle) * speed;
+                const vy = Math.sin(angle) * speed - (burst ? 0.4 : 0.15);
+                const size = burst ? 3 + Math.random() * 4 : 2 + Math.random() * 3.5;
+                const color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+                particles.push(new SparkleParticle(x, y, vx, vy, size, color, burst ? 35 + Math.random() * 20 : 25 + Math.random() * 15));
+            }
+            if (particles.length > 120) {
+                particles.splice(0, particles.length - 120);
+            }
+        }
+
+        // Track mouse position
+        window.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (!isVisible) {
+                isVisible = true;
+                dot.classList.add('is-visible');
+                ring.classList.add('is-visible');
+                ringX = mouseX;
+                ringY = mouseY;
+            }
+
+            // Dot follows precisely
+            dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+
+            // Distance-based particle spawn
+            const dx = mouseX - lastSpawnX;
+            const dy = mouseY - lastSpawnY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist > 12) {
+                spawnSparkle(mouseX + (Math.random() - 0.5) * 6, mouseY + (Math.random() - 0.5) * 6, Math.random() > 0.4 ? 1 : 2);
+                lastSpawnX = mouseX;
+                lastSpawnY = mouseY;
+            }
+        });
+
+        // Magical click burst
+        window.addEventListener('mousedown', function(e) {
+            ring.classList.add('cursor-ring--active');
+            spawnSparkle(e.clientX, e.clientY, 8, true);
+        });
+
+        window.addEventListener('mouseup', function() {
+            ring.classList.remove('cursor-ring--active');
+        });
+
+        // Interactive hover detection
+        const interactiveSelector = 'a, button, input, textarea, select, .btn, .skill-card, .project-card, .cert-card, .experience-card, .contact__item, [role="button"]';
+
+        document.addEventListener('mouseover', function(e) {
+            if (e.target && e.target.closest(interactiveSelector)) {
+                ring.classList.add('cursor-ring--hover');
+                dot.classList.add('cursor-dot--hover');
+            }
+        });
+
+        document.addEventListener('mouseout', function(e) {
+            if (e.target && e.target.closest(interactiveSelector)) {
+                const related = e.relatedTarget;
+                if (!related || !related.closest(interactiveSelector)) {
+                    ring.classList.remove('cursor-ring--hover');
+                    dot.classList.remove('cursor-dot--hover');
+                }
+            }
+        });
+
+        // Window boundary detection
+        document.addEventListener('mouseleave', function() {
+            isVisible = false;
+            dot.classList.remove('is-visible');
+            ring.classList.remove('is-visible');
+        });
+
+        document.addEventListener('mouseenter', function() {
+            isVisible = true;
+            dot.classList.add('is-visible');
+            ring.classList.add('is-visible');
+        });
+
+        // Animation loop for ring smooth lerp and sparkle canvas
+        function animate() {
+            // Ring smooth trailing lerp
+            if (isVisible) {
+                ringX += (mouseX - ringX) * 0.18;
+                ringY += (mouseY - ringY) * 0.18;
+                ring.style.transform = `translate3d(${ringX.toFixed(2)}px, ${ringY.toFixed(2)}px, 0)`;
+            }
+
+            // Render particles
+            ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.update();
+                p.draw(ctx);
+                if (p.life <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    // Initialize magic cursor
+    initMagicCursor();
+
+    console.log('Akhilesh Lalkumar Portfolio - Enhanced with Magic Cursor! ✨');
 });

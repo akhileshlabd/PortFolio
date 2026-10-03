@@ -1010,3 +1010,100 @@ section:first-of-type {
     padding: var(--space-16);
   }
 }
+
+/* --------------------------------------------------------------------------
+   Magic Interactive Cursor & Stardust Trail (Desktop Only)
+   -------------------------------------------------------------------------- */
+@media (pointer: fine) {
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    margin-top: -4px;
+    margin-left: -4px;
+    background-color: var(--color-teal-500);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    transform: translate3d(-100px, -100px, 0);
+    transition: opacity 0.25s ease, transform 0.15s ease, background-color 0.2s ease;
+    box-shadow: 0 0 10px rgba(33, 128, 141, 0.75);
+  }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    margin-top: -18px;
+    margin-left: -18px;
+    border: 1.5px solid rgba(33, 128, 141, 0.55);
+    background-color: rgba(33, 128, 141, 0.04);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    opacity: 0;
+    transform: translate3d(-100px, -100px, 0);
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                margin 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.2s ease,
+                background-color 0.2s ease,
+                opacity 0.25s ease;
+    box-shadow: 0 0 16px rgba(33, 128, 141, 0.18);
+  }
+
+  .cursor-dot.is-visible,
+  .cursor-ring.is-visible {
+    opacity: 1;
+  }
+
+  .cursor-ring.cursor-ring--hover {
+    width: 56px;
+    height: 56px;
+    margin-top: -28px;
+    margin-left: -28px;
+    border-color: rgba(33, 128, 141, 0.85);
+    background-color: rgba(33, 128, 141, 0.1);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    box-shadow: 0 0 22px rgba(33, 128, 141, 0.3);
+  }
+
+  .cursor-dot.cursor-dot--hover {
+    opacity: 0.35;
+    background-color: var(--color-orange-500);
+    box-shadow: 0 0 12px rgba(230, 129, 97, 0.8);
+  }
+
+  .cursor-ring.cursor-ring--active {
+    width: 26px;
+    height: 26px;
+    margin-top: -13px;
+    margin-left: -13px;
+    background-color: rgba(33, 128, 141, 0.28);
+    border-color: var(--color-teal-500);
+  }
+
+  #cursor-sparkle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 99997;
+  }
+}
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring,
+  #cursor-sparkle-canvas {
+    display: none !important;
+  }
+}
